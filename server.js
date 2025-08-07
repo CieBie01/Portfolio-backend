@@ -29,15 +29,7 @@ app.get('/', (req, res) => {
 });
 
 // Example DB Route
-app.get('/data', async (req, res) => {
-  try {
-    const db = await connectToDatabase();
-    // Your DB operations here
-    res.json({ data: "Sample data" });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+
 
 // Export for Vercel
 export default app;
