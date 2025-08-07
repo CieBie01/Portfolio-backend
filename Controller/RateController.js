@@ -1,4 +1,4 @@
-import {RateModel} from '../Model/RateModel.js';
+import  RateModel from '../Model/RateModel.js';
 const RateController = async (req,res)=>{
   const { rate, name, feedback}=req.body
     if (!rate || !name || !feedback) {
@@ -20,3 +20,4 @@ const RateController = async (req,res)=>{
         return res.status(500).json({ error: "Internal server error" });
     }
 }
+export default RateController;
