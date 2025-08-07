@@ -9,7 +9,7 @@ const RateSchema =new Schema({
     name:{
         type:String,
         required:true,
-        unique:true
+      
     },
     feedback:{  
         type:String,

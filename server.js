@@ -25,7 +25,9 @@ mongoose.connect(process.env.MONGO_URI)
 app.use('/api',router)
 
 // Example DB Route
-
-
+/*app.listen(process.env.PORT || 8000, () => {
+  console.log(`Server is running on port ${process.env.PORT || 8000}`);
+}
+)*/
 // Export for Vercel
 export default app;
