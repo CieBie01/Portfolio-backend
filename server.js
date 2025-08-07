@@ -8,17 +8,36 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const PORT = process.env.PORT || 8000;
-app.get('', (req, res) => {
+// MongoDB Connection
+let cachedDb = null;
+
+async function connectToDatabase() {
+  if (cachedDb) return cachedDb;
+  try {
+    const client = await mongoose.connect(process.env.MONGODB_URI);
+    cachedDb = client;
+    return cachedDb;
+  } catch (err) {
+    console.error("MongoDB Connection Error:", err);
+    throw err;
+  }
+}
+
+// Test Route
+app.get('/', (req, res) => {
   res.send({ status: "Backend is working!" });
 });
 
-// MongoDB Connection (Add your URI later)
+// Example DB Route
+app.get('/data', async (req, res) => {
+  try {
+    const db = await connectToDatabase();
+    // Your DB operations here
+    res.json({ data: "Sample data" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log("MongoDB Connected"))
-  .catch(err => console.log("MongoDB Error:", err));
-
-
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
+// Export for Vercel
+export default app;
