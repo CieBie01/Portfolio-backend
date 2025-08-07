@@ -8,19 +8,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// MongoDB Connection
-let cachedDb = null;
-
-async function connectToDatabase() {
-  if (cachedDb) return cachedDb;
-  try {
-    const client = await mongoose.connect(process.env.MONGODB_URI);
-    cachedDb = client;
-    return cachedDb;
-  } catch (err) {
-    console.error("MongoDB Connection Error:", err);
-    throw err;
-  }
+try{
+mongoose.connect(process.env.MONGO_URI)
+.then(() => {
+  console.log("Connected to MongoDB");  
+}).catch((error) => {
+  console.error("MongoDB connection error:", error);
+});
+}catch (error) {
+  console.error("Database connection error:", error);
 }
 
 // Test Route
