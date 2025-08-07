@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import router from './Router/Router';
 dotenv.config();
 
 const app = express();
@@ -21,9 +22,7 @@ mongoose.connect(process.env.MONGO_URI)
 }
 
 // Test Route
-app.get('/', (req, res) => {
-  res.send({ status: "Backend is working!" });
-});
+app.use('/api',router)
 
 // Example DB Route
 
