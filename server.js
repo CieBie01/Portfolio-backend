@@ -32,5 +32,5 @@ app.use('/api',router)
   console.log(`Server is running on port ${process.env.PORT || 8000}`);
 }
 )*/
-// Export for Vercel
+
 export default app;
