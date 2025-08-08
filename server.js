@@ -22,6 +22,9 @@ mongoose.connect(process.env.MONGO_URI)
 }
 
 // Test Route
+app.get('/test', (req, res) => {
+  res.send({ status: "API is working" });
+});
 app.use('/api',router)
 
 // Example DB Route
